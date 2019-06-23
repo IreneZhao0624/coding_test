@@ -180,11 +180,11 @@ BG.to_csv('/Users/Irene/Desktop/M/'+'BG_clean.csv')
 
 # normalise by tickers
 # load data
-df = pd.read_csv('/Users/Irene/Desktop/M/BG_clean.csv')
+BG = pd.read_csv('/Users/Irene/Desktop/M/BG_clean.csv')
 
 # select columns for normalization 
-names = df.iloc[:,5]
-data = df.iloc[:,6:-2]
+names = BG.iloc[:,5]
+data = BG.iloc[:,6:-2]
 
 def get_positions():
     """
@@ -240,7 +240,7 @@ raw_data = normalize_data()
 normalized_data = pd.concat(raw_data)
 
 # copy data 
-normalized_df = df.copy().drop(columns=df.iloc[:,6:-2])
+normalized_df = BG.copy().drop(columns=BG.iloc[:,6:-2])
 
 # save to csv 
 normalized_data.to_csv('normalized_data.csv')
@@ -251,7 +251,7 @@ files = ['normalized_df.csv', 'normalized_data.csv']
 dfs = [pd.read_csv(f, sep=",") for f in files]
 
 # final data
-final_cleaned_data = pd.concat(dfs, axis=1)
+final_cleaned_data = pd.concat(dfs, axis=1).iloc[:,1:]
 
 #BG.iloc[:,4:(len(BG.columns)-1)].groupby('symbol').transform(lambda x: (x - x.mean()) / x.std())
 
@@ -275,8 +275,11 @@ BG.columns
 
 regressors = ['Price', 'op_income_x',
        'net_income_x', 'eps_basic_x', 'eps_diluted_x', 'assets_x',
-       'cur_assets_x', 'cur_liab_x', 'cash_x', 'equity_x', 'cash_flow_inv_x']
+       'cur_assets_x', 'cur_liab_x\t', 'cash_x', 'equity_x', 'cash_flow_inv_x',
+       'dividend_x\t']
 
+BG = final_cleaned_data
+BG.columns
 model = Linear_Regression(BG)
 model.summary()
 
@@ -294,6 +297,15 @@ plt.title('Score for each feature')
 plt.ylabel('Feature')
 plt.xlabel('Score of importance')
 plt.show()
+
+#conclusion: we find there are few features of the listed companies 
+# can explain the percentange change in the holdings for BG fund. 
+# They are ranked by the importance (based on the p-values):
+# cash flows (-), stock price (+), dividend (+), equity (-), current asset (+)
+
+# Further analysis can be done by finding more macro indicators, sector indicators
+# We can also try how does those fundamentals along with market indicator influence 
+# the allocation of sectors in stead of a specific stock
 
 #----------- Logistic regression to analyze holding increase/decrease--------#
 BG = pd.read_csv('/Users/Irene/Desktop/M/'+'1061768.csv')
@@ -355,5 +367,9 @@ MAE_ordinal = cross_val_score(model_ordinal,
     scoring=MAE)
 print('Ordered logistic regression: ', np.mean(MAE_ordinal))
 
-# conclusion: multinomial model is the best amongst those 3 models in predicting
-# the direction of change on holdings
+# Conclusion: multinomial model is the best amongst those 3 models, 
+# linear regression, multinomial logistic regression, ordered logistic regression,
+# in predicting the direction of change on holdings: increase, unchanged, derease.
+
+# For further analysis, we can also try neural networks to model the changes 
+# in the holding direction if the data can trace back to 1990s. 
