@@ -27,7 +27,7 @@ fundamentals: we got information about the listed companies from SEC 10Q filings
 
 ## Description
 
-* **Holding**: Please check the `Holding` folders for details.
-* **Fundamental**: Please check the `Fundamental` folders for details.
-* **Analysis**: Please check the `Analysis` folder for details.
-* **Data**: Relevant data is stored in `Data` folder
+* **Holding**: Please check the `Holding` folders for the py file that crawls all the holdings information.
+* **Fundamental**: Please check the `Fundamental` folders for that crawls all the fundamental information.
+* **Analysis**: Please check the `Analysis` folder for the analysis.
+* **Data**: Relevant data is stored in `Data` folder.
