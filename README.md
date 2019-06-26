@@ -3,10 +3,12 @@
 ## Data
 
 fund:
+
 fund: we choosed 2 long-only hedge fund: Lone Pine Capital, Greenwich, Conn.(LPC) and Baupost Group, Boston (BG) as our focus of study
 hoilding: we crawed the quarterly holdings on SEC 13F-hr filings from 2013 - 2019
 
 investee:
+
 fundamentals: we got information about the listed companies from SEC 10Q filings, including: 
               revenues_x: revenues
               op_income_x:operating income
@@ -28,4 +30,4 @@ fundamentals: we got information about the listed companies from SEC 10Q filings
 * **Holding**: Please check the `Holding` folders for details.
 * **Fundamental**: Please check the `Fundamental` folders for details.
 * **Analysis**: Please check the `Analysis` folder for details.
-* **Data**: Relevant data is stored in this folder
+* **Data**: Relevant data is stored in `Data` folder
